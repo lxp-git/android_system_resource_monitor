@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">System Resource Monitor</string>
+    <string name="system_info_title">System Resource Monitor</string>
+    <string name="cpu_placeholder">CPU: --</string>
+    <string name="memory_placeholder">Memory: --</string>
+    <string name="process_count_placeholder">Total processes: --, running: --</string>
+    <string name="refresh">Refresh</string>
+    <string name="auto_refresh">Auto refresh</string>
+    <string name="auto_refresh_stop">Stop auto refresh</string>
+    <string name="process_list_header">Process list (sorted by CPU)</string>
+    <string name="toast_root_granted">Root access granted</string>
+    <string name="unknown_error">Unknown error</string>
+    <string name="toast_error">Error: %1$s</string>
+    <string name="process_count_format">Total processes: %1$d, running: %2$d</string>
+    <string name="dialog_root_title">Root access required</string>
+    <string name="dialog_root_message">This app needs root access to execute the top command and monitor system resources.&#x0a;&#x0a;Please ensure your device is rooted and grant root permissions to this app.</string>
+    <string name="dialog_retry">Retry</string>
+    <string name="dialog_exit">Exit</string>
+    <string name="process_state_format">State: %1$s</string>
+    <string name="process_user_format">User: %1$s</string>
+    <string name="pid_format">PID: %1$d</string>
+    <string name="cpu_label">CPU: </string>
+    <string name="mem_label">MEM: </string>
+    <string name="app_icon_content_description">Application icon</string>
+    <string name="cpu_info_unavailable">CPU: N/A</string>
+    <string name="memory_info_unavailable">Memory: N/A</string>
+</resources>

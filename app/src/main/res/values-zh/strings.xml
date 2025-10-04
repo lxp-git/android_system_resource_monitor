@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">系统资源监控</string>
+    <string name="system_info_title">系统资源监控</string>
+    <string name="cpu_placeholder">CPU: --</string>
+    <string name="memory_placeholder">内存: --</string>
+    <string name="process_count_placeholder">进程总数: --, 运行中: --</string>
+    <string name="refresh">刷新</string>
+    <string name="auto_refresh">自动刷新</string>
+    <string name="auto_refresh_stop">停止自动刷新</string>
+    <string name="process_list_header">进程列表 (按CPU占用排序)</string>
+    <string name="toast_root_granted">Root权限已获取</string>
+    <string name="unknown_error">未知错误</string>
+    <string name="toast_error">错误: %1$s</string>
+    <string name="process_count_format">进程总数: %1$d, 运行中: %2$d</string>
+    <string name="dialog_root_title">需要Root权限</string>
+    <string name="dialog_root_message">此应用需要Root权限才能执行top命令并监控系统资源。&#x0a;&#x0a;请确保您的设备已获取Root权限，并授予本应用Root访问权限。</string>
+    <string name="dialog_retry">重试</string>
+    <string name="dialog_exit">退出</string>
+    <string name="process_state_format">状态: %1$s</string>
+    <string name="process_user_format">用户: %1$s</string>
+    <string name="pid_format">PID: %1$d</string>
+    <string name="cpu_label">CPU: </string>
+    <string name="mem_label">内存: </string>
+    <string name="app_icon_content_description">应用图标</string>
+    <string name="cpu_info_unavailable">CPU: N/A</string>
+    <string name="memory_info_unavailable">内存: N/A</string>
+</resources>
