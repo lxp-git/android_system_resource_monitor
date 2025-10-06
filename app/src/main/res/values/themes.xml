@@ -1,9 +1,13 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.TopCmd" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+<resources>
+    <style name="Theme.TopCmd" parent="@android:style/Theme.DeviceDefault.NoActionBar">
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:textColor">@color/primary_text</item>
+        <item name="android:textColorPrimary">@color/primary_text</item>
+        <item name="android:textColorSecondary">@color/secondary_text</item>
+        <item name="android:statusBarColor">@color/background</item>
+        <item name="android:navigationBarColor">@color/background</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:buttonStyle">@style/Widget.TopCmd.Button</item>
     </style>
-
-    <style name="Theme.TopCmd" parent="Base.Theme.TopCmd" />
 </resources>

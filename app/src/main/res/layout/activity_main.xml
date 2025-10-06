@@ -1,82 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
     <!-- System Info Card -->
-    <com.google.android.material.card.MaterialCardView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        app:cardElevation="4dp"
-        app:cardCornerRadius="8dp">
+        android:background="@drawable/card_background"
+        android:elevation="4dp"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/systemInfoTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/primary_text"
+            android:text="@string/system_info_title"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/cpuInfoText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp"
-            android:minHeight="144dp">
+            android:layout_marginBottom="4dp"
+            android:minHeight="20dp"
+            android:textColor="@color/secondary_text"
+            android:text="@string/cpu_placeholder"
+            android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/systemInfoTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/system_info_title"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="8dp" />
+        <TextView
+            android:id="@+id/memInfoText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:minHeight="20dp"
+            android:textColor="@color/secondary_text"
+            android:text="@string/memory_placeholder"
+            android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/cpuInfoText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/cpu_placeholder"
-                android:textSize="14sp"
-                android:minHeight="20dp"
-                android:layout_marginBottom="4dp" />
+        <TextView
+            android:id="@+id/processCountText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="20dp"
+            android:textColor="@color/secondary_text"
+            android:text="@string/process_count_placeholder"
+            android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/memInfoText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/memory_placeholder"
-                android:textSize="14sp"
-                android:minHeight="20dp"
-                android:layout_marginBottom="4dp" />
-
-            <TextView
-                android:id="@+id/processCountText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/process_count_placeholder"
-                android:textSize="14sp"
-                android:minHeight="20dp" />
-
-        </LinearLayout>
-
-    </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
 
     <!-- Control Buttons -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp">
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/refreshButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginEnd="8dp"
+            android:layout_weight="1"
             android:text="@string/refresh" />
 
         <Button
@@ -92,12 +89,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/process_list_header"
-        android:textSize="16sp"
-        android:textStyle="bold"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp" />
+        android:layout_marginBottom="8dp"
+        android:textColor="@color/primary_text"
+        android:text="@string/process_list_header"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <!-- RecyclerView for Process List -->
     <androidx.recyclerview.widget.RecyclerView

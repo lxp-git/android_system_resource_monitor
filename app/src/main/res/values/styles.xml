@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Widget.TopCmd.Button" parent="@android:style/Widget.DeviceDefault.Button">
+        <item name="android:background">@drawable/button_background</item>
+        <item name="android:textColor">@color/primary_text</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+</resources>

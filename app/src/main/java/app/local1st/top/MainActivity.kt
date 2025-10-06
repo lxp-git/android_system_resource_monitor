@@ -1,40 +1,59 @@
 package app.local1st.top
 
+import android.app.Activity
+import android.app.AlertDialog
+import android.content.res.Configuration
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.updatePadding
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.local1st.top.databinding.ActivityMainBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlinx.coroutines.cancel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : Activity() {
     
     private lateinit var binding: ActivityMainBinding
     private lateinit var processAdapter: ProcessAdapter
     private var autoRefreshJob: Job? = null
     private var isAutoRefreshing = false
+    private val uiScope = MainScope()
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         
+        applySystemBarsAppearance()
         setupWindowInsets()
         setupRecyclerView()
         setupButtons()
         checkRootAccess()
+    }
+
+    private fun applySystemBarsAppearance() {
+        val isNightMode =
+            (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
+        val barColor = ContextCompat.getColor(this, R.color.background)
+        window.statusBarColor = barColor
+        window.navigationBarColor = barColor
+
+        WindowInsetsControllerCompat(window, binding.root).apply {
+            isAppearanceLightStatusBars = !isNightMode
+            isAppearanceLightNavigationBars = !isNightMode
+        }
     }
     
     private fun setupWindowInsets() {
@@ -66,7 +85,7 @@ class MainActivity : AppCompatActivity() {
     }
     
     private fun checkRootAccess() {
-        lifecycleScope.launch {
+        uiScope.launch {
             val hasRoot = withContext(Dispatchers.IO) {
                 RootCommandExecutor.isRootAvailable()
             }
@@ -85,7 +104,7 @@ class MainActivity : AppCompatActivity() {
     }
     
     private fun refreshProcessList() {
-        lifecycleScope.launch {
+        uiScope.launch {
             try {
                 // Execute top command in background
                 val output = withContext(Dispatchers.IO) {
@@ -145,7 +164,7 @@ class MainActivity : AppCompatActivity() {
         isAutoRefreshing = true
         binding.autoRefreshButton.text = getString(R.string.auto_refresh_stop)
         
-        autoRefreshJob = lifecycleScope.launch {
+        autoRefreshJob = uiScope.launch {
             while (isActive) {
                 refreshProcessList()
                 delay(3000) // Refresh every 3 seconds
@@ -177,5 +196,6 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         stopAutoRefresh()
+        uiScope.cancel()
     }
 }
