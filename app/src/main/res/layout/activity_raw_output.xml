@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <android.widget.Toolbar
+        android:id="@+id/rawOutputToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background"
+        android:minHeight="?android:attr/actionBarSize"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:title="@string/dialog_raw_output_title"
+        android:titleTextColor="@color/primary_text" />
+
+    <ScrollView
+        android:id="@+id/rawOutputScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fadeScrollbars="false"
+        android:fillViewport="true"
+        android:clipToPadding="false">
+
+        <TextView
+            android:id="@+id/rawOutputText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:lineSpacingExtra="2dp"
+            android:padding="16dp"
+            android:scrollbars="vertical"
+            android:text=""
+            android:textColor="@color/primary_text"
+            android:textIsSelectable="true"
+            android:textSize="12sp" />
+    </ScrollView>
+
+</LinearLayout>

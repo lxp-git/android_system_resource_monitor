@@ -24,4 +24,11 @@
     <string name="app_icon_content_description">Application icon</string>
     <string name="cpu_info_unavailable">CPU: N/A</string>
     <string name="memory_info_unavailable">Memory: N/A</string>
+    <string name="view_raw_output">Raw output</string>
+    <string name="dialog_raw_output_title">Original top output</string>
+    <string name="toast_no_raw_output">No top output captured yet</string>
+    <string name="raw_output_copy">Copy</string>
+    <string name="raw_output_close">Close</string>
+    <string name="raw_output_copied">Raw output copied to clipboard</string>
+    <string name="raw_output_empty_state">No raw top output captured yet. Tap Refresh to fetch data.</string>
 </resources>

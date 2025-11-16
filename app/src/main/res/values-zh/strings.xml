@@ -24,4 +24,11 @@
     <string name="app_icon_content_description">应用图标</string>
     <string name="cpu_info_unavailable">CPU: N/A</string>
     <string name="memory_info_unavailable">内存: N/A</string>
+    <string name="view_raw_output">查看原始输出</string>
+    <string name="dialog_raw_output_title">top原始输出</string>
+    <string name="toast_no_raw_output">尚未获取到top输出</string>
+    <string name="raw_output_copy">复制</string>
+    <string name="raw_output_close">关闭</string>
+    <string name="raw_output_copied">原始输出已复制</string>
+    <string name="raw_output_empty_state">暂无top原始输出，请先刷新数据。</string>
 </resources>

@@ -5,8 +5,9 @@ import android.content.pm.PackageManager
 import android.os.Process
 
 object TopOutputParser {
-    
-    fun parseTopOutput(output: String, packageManager: PackageManager): Pair<SystemInfo, List<ProcessInfo>> {
+    private val tasksLineRegex = Regex("""^Tasks:\s*(\\d+)\s+total,\s*(\\d+)\s+running""", RegexOption.IGNORE_CASE)
+
+    fun parseTopOutput(output: String, packageManager: PackageManager? = null): Pair<SystemInfo, List<ProcessInfo>> {
         val lines = output.split("\n")
         var systemInfo = SystemInfo()
         val processList = mutableListOf<ProcessInfo>()
@@ -25,15 +26,23 @@ object TopOutputParser {
                     systemInfo = systemInfo.copy(memoryUsage = line.trim())
                 }
                 // Parse Tasks/Processes info
-                line.contains("Tasks:") || line.contains("total") -> {
-                    val parts = line.split(",")
-                    parts.firstOrNull()?.let {
-                        val total = it.filter { c -> c.isDigit() }
-                        systemInfo = systemInfo.copy(totalProcesses = total.toIntOrNull() ?: 0)
-                    }
-                    parts.find { it.contains("running") }?.let {
-                        val running = it.filter { c -> c.isDigit() }
-                        systemInfo = systemInfo.copy(runningProcesses = running.toIntOrNull() ?: 0)
+                line.trim().startsWith("Tasks:", ignoreCase = true) -> {
+                    val match = tasksLineRegex.find(line)
+                    if (match != null) {
+                        systemInfo = systemInfo.copy(
+                            totalProcesses = match.groupValues[1].toIntOrNull() ?: 0,
+                            runningProcesses = match.groupValues[2].toIntOrNull() ?: 0
+                        )
+                    } else {
+                        val parts = line.split(",")
+                        parts.firstOrNull()?.let {
+                            val total = it.filter { c -> c.isDigit() }
+                            systemInfo = systemInfo.copy(totalProcesses = total.toIntOrNull() ?: 0)
+                        }
+                        parts.find { it.contains("running", ignoreCase = true) }?.let {
+                            val running = it.filter { c -> c.isDigit() }
+                            systemInfo = systemInfo.copy(runningProcesses = running.toIntOrNull() ?: 0)
+                        }
                     }
                 }
                 // Detect process list header
@@ -57,7 +66,8 @@ object TopOutputParser {
         return Pair(systemInfo, sortedList)
     }
     
-    private fun enrichProcessInfo(processInfo: ProcessInfo, packageManager: PackageManager): ProcessInfo {
+    private fun enrichProcessInfo(processInfo: ProcessInfo, packageManager: PackageManager?): ProcessInfo {
+        if (packageManager == null) return processInfo
         // Try to extract package name from command
         val candidates = mutableListOf<String>()
 

@@ -80,8 +80,16 @@
             android:id="@+id/autoRefreshButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:text="@string/auto_refresh" />
+
+        <Button
+            android:id="@+id/rawOutputButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/view_raw_output" />
 
     </LinearLayout>
 

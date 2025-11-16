@@ -29,6 +29,7 @@ class MainActivity : Activity() {
     private var autoRefreshJob: Job? = null
     private var isAutoRefreshing = false
     private val uiScope = MainScope()
+    private var lastTopOutput: String = ""
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,6 +83,10 @@ class MainActivity : Activity() {
         binding.autoRefreshButton.setOnClickListener {
             toggleAutoRefresh()
         }
+
+        binding.rawOutputButton.setOnClickListener {
+            openRawOutputScreen()
+        }
     }
     
     private fun checkRootAccess() {
@@ -110,6 +115,7 @@ class MainActivity : Activity() {
                 val output = withContext(Dispatchers.IO) {
                     RootCommandExecutor.executeTopCommand(1)
                 }
+                lastTopOutput = output
                 
                 // Parse output
                 val (systemInfo, processList) = withContext(Dispatchers.Default) {
@@ -177,6 +183,19 @@ class MainActivity : Activity() {
         binding.autoRefreshButton.text = getString(R.string.auto_refresh)
         autoRefreshJob?.cancel()
         autoRefreshJob = null
+    }
+
+    private fun openRawOutputScreen() {
+        if (lastTopOutput.isBlank()) {
+            Toast.makeText(
+                this,
+                getString(R.string.toast_no_raw_output),
+                Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
+
+        RawOutputActivity.start(this, lastTopOutput)
     }
     
     private fun showRootErrorDialog() {
